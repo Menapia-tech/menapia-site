@@ -1,0 +1,131 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import SectionHeading from '../../components/SectionHeading.astro';
+---
+
+<BaseLayout
+  title="Forecast Partners"
+  description="Menapia collaborates with forecast and data-ingest teams to deliver atmospheric profile observations in operational formats."
+>
+  <section class="pt-32 pb-20 sm:pt-40 sm:pb-28">
+    <div class="container-wide section-padding">
+      <SectionHeading
+        tag="Forecast Partners"
+        title="Ingest-ready atmospheric observations"
+        subtitle="We collaborate with forecast centres and data-ingest teams to deliver calibrated vertical profiles in formats and workflows that integrate with operational systems."
+      />
+    </div>
+  </section>
+
+  <!-- How we work -->
+  <section class="py-20 border-t border-slate-800/50">
+    <div class="container-wide section-padding">
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div class="glass rounded-2xl p-6 sm:p-8">
+          <div class="w-10 h-10 rounded-lg bg-atmos-950/80 border border-atmos-800/50 flex items-center justify-center mb-4 text-atmos-400">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 7v10c0 2.21 3.582 4 8 4s8-1.79 8-4V7M4 7c0 2.21 3.582 4 8 4s8-1.79 8-4M4 7c0-2.21 3.582-4 8-4s8 1.79 8 4" />
+            </svg>
+          </div>
+          <h3 class="text-white font-semibold text-lg mb-2">Ingest integration</h3>
+          <p class="text-slate-400 text-sm leading-relaxed">
+            We work with your data-ingest pipeline to ensure our observations arrive in the right format, at the right time, with the metadata your systems require.
+          </p>
+        </div>
+
+        <div class="glass rounded-2xl p-6 sm:p-8">
+          <div class="w-10 h-10 rounded-lg bg-atmos-950/80 border border-atmos-800/50 flex items-center justify-center mb-4 text-atmos-400">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+            </svg>
+          </div>
+          <h3 class="text-white font-semibold text-lg mb-2">Metadata &amp; format alignment</h3>
+          <p class="text-slate-400 text-sm leading-relaxed">
+            Delivery in standard meteorological formats including netCDF, BUFR, TEMP, and WMO-compliant encodings. Full metadata lineage from sensor to delivery.
+          </p>
+        </div>
+
+        <div class="glass rounded-2xl p-6 sm:p-8">
+          <div class="w-10 h-10 rounded-lg bg-atmos-950/80 border border-atmos-800/50 flex items-center justify-center mb-4 text-atmos-400">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
+            </svg>
+          </div>
+          <h3 class="text-white font-semibold text-lg mb-2">Evaluation &amp; operationalisation</h3>
+          <p class="text-slate-400 text-sm leading-relaxed">
+            From initial evaluation trials through to operational data delivery. We support the full journey from proof-of-concept to routine ingest.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Delivery formats -->
+  <section class="py-20 border-t border-slate-800/50">
+    <div class="container-wide section-padding">
+      <SectionHeading
+        tag="Formats"
+        title="Standard delivery formats"
+        subtitle="We deliver in the formats your systems expect."
+      />
+
+      <div class="mt-10 flex flex-wrap gap-3">
+        {['netCDF', 'BUFR', 'TEMP', 'WMO', 'API'].map((format) => (
+          <span class="px-4 py-2 glass rounded-xl text-sm font-mono text-atmos-300">
+            {format}
+          </span>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Partnership stages -->
+  <section class="py-20 border-t border-slate-800/50">
+    <div class="container-wide section-padding">
+      <SectionHeading
+        tag="Process"
+        title="How partnerships develop"
+      />
+
+      <div class="mt-10 space-y-6 max-w-2xl">
+        <div class="flex gap-4">
+          <div class="shrink-0 w-8 h-8 rounded-full bg-amber-500/10 border border-amber-500/20 flex items-center justify-center text-amber-400 text-xs font-bold">1</div>
+          <div>
+            <h3 class="text-white font-semibold">Exploring</h3>
+            <p class="text-slate-400 text-sm mt-1">Initial discussions on data requirements, formats, and evaluation scope.</p>
+          </div>
+        </div>
+        <div class="flex gap-4">
+          <div class="shrink-0 w-8 h-8 rounded-full bg-atmos-500/10 border border-atmos-500/20 flex items-center justify-center text-atmos-400 text-xs font-bold">2</div>
+          <div>
+            <h3 class="text-white font-semibold">Pilot</h3>
+            <p class="text-slate-400 text-sm mt-1">Trial data delivery and ingest testing within partner systems.</p>
+          </div>
+        </div>
+        <div class="flex gap-4">
+          <div class="shrink-0 w-8 h-8 rounded-full bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center text-emerald-400 text-xs font-bold">3</div>
+          <div>
+            <h3 class="text-white font-semibold">Operational</h3>
+            <p class="text-slate-400 text-sm mt-1">Routine, operationalised data delivery integrated into forecast or analysis workflows.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="py-20 border-t border-slate-800/50">
+    <div class="container-narrow section-padding text-center">
+      <h2 class="text-2xl sm:text-3xl font-bold text-white">Start an ingest conversation</h2>
+      <p class="mt-3 text-slate-400 max-w-lg mx-auto">
+        If you operate a forecast or data-ingest system and want to explore how drone-derived atmospheric profiles could contribute, we would welcome the conversation.
+      </p>
+      <a
+        href="/menapia-site/contact/"
+        class="mt-6 inline-block px-6 py-3 bg-atmos-600 hover:bg-atmos-500 text-white font-medium rounded-xl transition-colors text-sm"
+      >
+        Get in touch
+      </a>
+    </div>
+  </section>
+</BaseLayout>

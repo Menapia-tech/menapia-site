@@ -1,0 +1,177 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import SectionHeading from '../components/SectionHeading.astro';
+import CapabilityCard from '../components/CapabilityCard.astro';
+import ProjectCard from '../components/ProjectCard.astro';
+import { getCollection } from 'astro:content';
+
+const projects = (await getCollection('projects')).sort((a, b) => a.data.order - b.data.order);
+---
+
+<BaseLayout
+  title="Atmospheric Profiling at Network Scale"
+  description="Menapia builds and operates networks of vertically profiling multicopter drones that collect calibrated atmospheric columns, underpinning forecasting, monitoring, and decision systems."
+>
+  <!-- Hero -->
+  <section class="relative pt-32 pb-20 sm:pt-40 sm:pb-28 overflow-hidden">
+    <div class="absolute inset-0 bg-gradient-to-b from-atmos-950/30 via-slate-950 to-slate-950" aria-hidden="true"></div>
+    <div class="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[600px] bg-atmos-600/5 rounded-full blur-3xl" aria-hidden="true"></div>
+
+    <div class="relative container-wide section-padding">
+      <div class="max-w-3xl">
+        <h1 class="text-4xl sm:text-5xl lg:text-6xl font-bold text-white tracking-tight leading-[1.1]">
+          Atmospheric profiling—<br />
+          <span class="text-gradient">at network scale.</span>
+        </h1>
+        <p class="mt-6 text-lg sm:text-xl text-slate-400 leading-relaxed max-w-2xl">
+          We build and operate networks of vertically profiling multicopter drones that collect
+          calibrated atmospheric columns. These observations underpin forecasting, monitoring,
+          and decision systems.
+        </p>
+        <div class="mt-8 flex flex-wrap gap-4">
+          <a
+            href="/menapia-site/projects/"
+            class="px-6 py-3 bg-atmos-600 hover:bg-atmos-500 text-white font-medium rounded-xl transition-colors text-sm"
+          >
+            Explore projects
+          </a>
+          <a
+            href="/menapia-site/contact/"
+            class="px-6 py-3 border border-slate-600 hover:border-slate-500 text-slate-200 hover:text-white font-medium rounded-xl transition-colors text-sm"
+          >
+            Talk to us
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Mission -->
+  <section class="py-20 sm:py-28">
+    <div class="container-wide section-padding">
+      <div class="max-w-3xl mx-auto text-center">
+        <SectionHeading
+          tag="Our mission"
+          title="A nervous system for the atmosphere"
+          subtitle="The atmosphere remains one of the most under-observed environments on Earth. We are building the observing infrastructure to change that — routine, calibrated, vertically resolved measurements deployed as operational networks."
+          align="center"
+        />
+      </div>
+    </div>
+  </section>
+
+  <!-- Capabilities -->
+  <section class="py-20 sm:py-28 border-t border-slate-800/50">
+    <div class="container-wide section-padding">
+      <SectionHeading
+        tag="Capabilities"
+        title="What we deliver"
+        subtitle="Operational atmospheric profiling built around measurement quality, network coordination, and data integration."
+      />
+
+      <div class="mt-12 grid grid-cols-1 md:grid-cols-3 gap-6">
+        <CapabilityCard
+          icon="&#9650;"
+          title="Operational profiling"
+          description="Routine vertical profiles collected by multicopter drone networks, designed for sustained operations across diverse environments and weather conditions."
+        />
+        <CapabilityCard
+          icon="&#9670;"
+          title="Measurement quality"
+          description="Calibrated, traceable observations with rigorous QA/QC processes. Every profile is quality-controlled and metadata-rich from collection through delivery."
+        />
+        <CapabilityCard
+          icon="&#9679;"
+          title="Data integration"
+          description="Observations delivered in standard meteorological formats — netCDF, BUFR, TEMP — ready for ingest into forecast and analysis systems."
+        />
+      </div>
+    </div>
+  </section>
+
+  <!-- Featured Projects -->
+  <section class="py-20 sm:py-28 border-t border-slate-800/50">
+    <div class="container-wide section-padding">
+      <SectionHeading
+        tag="Projects"
+        title="Research collaborations"
+        subtitle="Working with leading research programmes to advance atmospheric observation and forecasting."
+      />
+
+      <div class="mt-12 grid grid-cols-1 md:grid-cols-2 gap-6">
+        {projects.map((project) => (
+          <ProjectCard
+            title={project.data.title}
+            programme={project.data.programme}
+            role={project.data.role}
+            status={project.data.status}
+            summary={project.data.summary}
+            externalUrl={project.data.externalUrl}
+            tags={project.data.tags}
+            slug={project.id}
+          />
+        ))}
+      </div>
+
+      <div class="mt-8 text-center">
+        <a
+          href="/menapia-site/projects/"
+          class="text-sm text-atmos-400 hover:text-atmos-300 font-medium transition-colors"
+        >
+          View all projects &rarr;
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Globe teaser -->
+  <section class="py-20 sm:py-28 border-t border-slate-800/50">
+    <div class="container-wide section-padding">
+      <div class="glass rounded-2xl p-8 sm:p-12 text-center">
+        <SectionHeading
+          tag="Operations"
+          title="Global deployment footprint"
+          subtitle="Our operations span multiple sites and research campaigns. Explore our live deployment map."
+          align="center"
+        />
+        <div class="mt-8">
+          <a
+            href="/menapia-site/operations/"
+            class="inline-flex items-center gap-2 px-6 py-3 bg-atmos-600 hover:bg-atmos-500 text-white font-medium rounded-xl transition-colors text-sm"
+          >
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
+            View operations globe
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="py-20 sm:py-28 border-t border-slate-800/50">
+    <div class="container-narrow section-padding text-center">
+      <h2 class="text-3xl sm:text-4xl font-bold text-white tracking-tight">
+        Ready to collaborate?
+      </h2>
+      <p class="mt-4 text-lg text-slate-400 max-w-xl mx-auto">
+        Whether you are a forecast centre, research programme, or decision-maker that depends on atmospheric data — we would like to hear from you.
+      </p>
+      <div class="mt-8 flex flex-wrap justify-center gap-4">
+        <a
+          href="/menapia-site/contact/"
+          class="px-6 py-3 bg-atmos-600 hover:bg-atmos-500 text-white font-medium rounded-xl transition-colors text-sm"
+        >
+          Talk to us
+        </a>
+        <a
+          href="/menapia-site/forecast-partners/"
+          class="px-6 py-3 border border-slate-600 hover:border-slate-500 text-slate-200 hover:text-white font-medium rounded-xl transition-colors text-sm"
+        >
+          Forecast partners
+        </a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

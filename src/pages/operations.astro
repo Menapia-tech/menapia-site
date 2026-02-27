@@ -1,0 +1,237 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout
+  title="Operations"
+  description="Live operations map showing Menapia's atmospheric profiling deployment sites and research campaigns worldwide."
+>
+  <section class="pt-20 h-screen flex flex-col">
+    <!-- Globe container -->
+    <div id="globe-container" class="flex-1 relative">
+      <!-- Loading state -->
+      <div id="globe-loading" class="absolute inset-0 flex items-center justify-center bg-slate-950">
+        <div class="text-center">
+          <div class="w-8 h-8 border-2 border-atmos-600 border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
+          <p class="text-slate-400 text-sm">Loading operations globe...</p>
+        </div>
+      </div>
+
+      <!-- WebGL fallback -->
+      <div id="globe-fallback" class="hidden absolute inset-0 flex items-center justify-center bg-slate-950 section-padding">
+        <div class="text-center max-w-md">
+          <svg class="w-16 h-16 text-slate-600 mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+          </svg>
+          <h2 class="text-white text-xl font-bold mb-2">3D globe unavailable</h2>
+          <p class="text-slate-400 text-sm mb-6">Your browser does not support WebGL, which is required for the interactive operations globe.</p>
+          <h3 class="text-white font-semibold text-sm mb-3">Active operations</h3>
+          <div id="fallback-list" class="space-y-2 text-left"></div>
+        </div>
+      </div>
+
+      <!-- Side panel -->
+      <div
+        id="site-panel"
+        class="hidden absolute top-20 right-4 z-10 w-80 glass rounded-2xl p-6 shadow-xl max-h-[calc(100vh-8rem)] overflow-y-auto"
+        role="dialog"
+        aria-label="Site details"
+      >
+        <button
+          id="panel-close"
+          class="absolute top-3 right-3 p-1.5 rounded-lg text-slate-400 hover:text-white hover:bg-slate-700/50 transition-colors"
+          aria-label="Close panel"
+        >
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+          </svg>
+        </button>
+        <div id="panel-content"></div>
+      </div>
+    </div>
+
+    <!-- Legend bar -->
+    <div class="glass border-t border-slate-700/50 px-4 py-3">
+      <div class="container-wide flex flex-wrap items-center justify-between gap-3 text-xs">
+        <div class="flex flex-wrap gap-4">
+          <span class="flex items-center gap-1.5">
+            <span class="w-2.5 h-2.5 rounded-full bg-emerald-400"></span> Active
+          </span>
+          <span class="flex items-center gap-1.5">
+            <span class="w-2.5 h-2.5 rounded-full bg-amber-400"></span> Planned
+          </span>
+          <span class="flex items-center gap-1.5">
+            <span class="w-2.5 h-2.5 rounded-full bg-blue-400"></span> Standby
+          </span>
+          <span class="flex items-center gap-1.5">
+            <span class="w-2.5 h-2.5 rounded-full bg-slate-500"></span> Confidential
+          </span>
+        </div>
+        <span id="last-refresh" class="text-slate-500">Auto-refresh: 60s</span>
+      </div>
+    </div>
+  </section>
+
+  <script>
+    async function initGlobe() {
+      // Check WebGL support
+      const canvas = document.createElement('canvas');
+      const gl = canvas.getContext('webgl') || canvas.getContext('experimental-webgl');
+
+      if (!gl) {
+        document.getElementById('globe-loading')?.classList.add('hidden');
+        document.getElementById('globe-fallback')?.classList.remove('hidden');
+        loadFallbackList();
+        return;
+      }
+
+      try {
+        const Globe = (await import('globe.gl')).default;
+
+        const container = document.getElementById('globe-container');
+        if (!container) return;
+
+        const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+        const globe = Globe()(container)
+          .globeImageUrl('https://unpkg.com/three-globe/example/img/earth-blue-marble.jpg')
+          .bumpImageUrl('https://unpkg.com/three-globe/example/img/earth-topology.png')
+          .backgroundImageUrl('https://unpkg.com/three-globe/example/img/night-sky.png')
+          .showAtmosphere(true)
+          .atmosphereColor('#3390ff')
+          .atmosphereAltitude(0.15)
+          .pointOfView({ lat: 54, lng: -2, altitude: 2.5 })
+          .width(container.clientWidth)
+          .height(container.clientHeight);
+
+        // Disable auto-rotation if reduced motion preferred
+        if (!prefersReducedMotion) {
+          globe.controls().autoRotate = true;
+          globe.controls().autoRotateSpeed = 0.3;
+        }
+
+        // Status colour mapping
+        const statusColours: Record<string, string> = {
+          active: '#34d399',
+          planned: '#fbbf24',
+          standby: '#60a5fa',
+          confidential: '#64748b',
+        };
+
+        async function loadData() {
+          try {
+            const res = await fetch('/menapia-site/ops/operations.geojson');
+            const data = await res.json();
+
+            globe
+              .pointsData(data.features.map((f: any) => ({
+                lat: f.geometry.coordinates[1],
+                lng: f.geometry.coordinates[0],
+                size: f.properties.status === 'active' ? 0.12 : 0.08,
+                color: statusColours[f.properties.status] || '#64748b',
+                label: f.properties.name,
+                ...f.properties,
+              })))
+              .pointAltitude('size')
+              .pointColor('color')
+              .pointRadius(0.4)
+              .pointLabel((d: any) => `
+                <div style="background: rgba(15,23,42,0.9); backdrop-filter: blur(12px); border: 1px solid rgba(71,85,105,0.5); padding: 8px 12px; border-radius: 8px; font-family: Inter, sans-serif; font-size: 12px; color: #e2e8f0; min-width: 140px;">
+                  <div style="font-weight: 600; margin-bottom: 2px;">${d.name}</div>
+                  <div style="color: #94a3b8;">${d.type}</div>
+                </div>
+              `)
+              .onPointClick((point: any) => {
+                showPanel(point);
+              });
+
+            document.getElementById('globe-loading')?.classList.add('hidden');
+
+            const refreshEl = document.getElementById('last-refresh');
+            if (refreshEl) {
+              refreshEl.textContent = `Last refresh: ${new Date().toLocaleTimeString('en-GB')}`;
+            }
+          } catch (err) {
+            console.error('Failed to load operations data:', err);
+          }
+        }
+
+        function showPanel(point: any) {
+          const panel = document.getElementById('site-panel');
+          const content = document.getElementById('panel-content');
+          if (!panel || !content) return;
+
+          const statusBadge: Record<string, string> = {
+            active: 'background: rgba(52,211,153,0.1); color: #34d399; border: 1px solid rgba(52,211,153,0.2)',
+            planned: 'background: rgba(251,191,36,0.1); color: #fbbf24; border: 1px solid rgba(251,191,36,0.2)',
+            standby: 'background: rgba(96,165,250,0.1); color: #60a5fa; border: 1px solid rgba(96,165,250,0.2)',
+            confidential: 'background: rgba(100,116,139,0.1); color: #94a3b8; border: 1px solid rgba(100,116,139,0.2)',
+          };
+
+          content.innerHTML = `
+            <h3 style="color: white; font-weight: 600; font-size: 16px; margin-bottom: 8px;">${point.name}</h3>
+            <span style="${statusBadge[point.status] || statusBadge.confidential}; padding: 2px 8px; border-radius: 9999px; font-size: 11px; font-weight: 500; display: inline-block; margin-bottom: 12px;">${point.status}</span>
+            <p style="color: #94a3b8; font-size: 13px; margin-bottom: 8px;">${point.type}</p>
+            <p style="color: #64748b; font-size: 11px;">Last updated: ${new Date(point.lastUpdated).toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' })}</p>
+            ${point.relatedLink ? `<a href="${point.relatedLink}" style="color: #3390ff; font-size: 13px; margin-top: 12px; display: inline-block;">View related projects &rarr;</a>` : ''}
+          `;
+
+          panel.classList.remove('hidden');
+        }
+
+        document.getElementById('panel-close')?.addEventListener('click', () => {
+          document.getElementById('site-panel')?.classList.add('hidden');
+        });
+
+        // Resize handling
+        window.addEventListener('resize', () => {
+          if (container) {
+            globe.width(container.clientWidth).height(container.clientHeight);
+          }
+        });
+
+        // Load initial data
+        await loadData();
+
+        // Auto-refresh every 60 seconds
+        setInterval(loadData, 60000);
+
+      } catch (err) {
+        console.error('Failed to initialise globe:', err);
+        document.getElementById('globe-loading')?.classList.add('hidden');
+        document.getElementById('globe-fallback')?.classList.remove('hidden');
+        loadFallbackList();
+      }
+    }
+
+    async function loadFallbackList() {
+      try {
+        const res = await fetch('/menapia-site/ops/operations.geojson');
+        const data = await res.json();
+        const list = document.getElementById('fallback-list');
+        if (!list) return;
+
+        const statusDot: Record<string, string> = {
+          active: '#34d399',
+          planned: '#fbbf24',
+          standby: '#60a5fa',
+          confidential: '#64748b',
+        };
+
+        list.innerHTML = data.features.map((f: any) => `
+          <div style="display: flex; align-items: center; gap: 8px; padding: 8px 12px; background: rgba(15,23,42,0.6); border: 1px solid rgba(71,85,105,0.3); border-radius: 8px;">
+            <span style="width: 8px; height: 8px; border-radius: 50%; background: ${statusDot[f.properties.status] || '#64748b'}; flex-shrink: 0;"></span>
+            <div>
+              <div style="color: white; font-size: 13px; font-weight: 500;">${f.properties.name}</div>
+              <div style="color: #94a3b8; font-size: 11px;">${f.properties.type}</div>
+            </div>
+          </div>
+        `).join('');
+      } catch {
+        // Silently fail
+      }
+    }
+
+    initGlobe();
+  </script>
+</BaseLayout>

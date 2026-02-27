@@ -1,0 +1,165 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import SectionHeading from '../components/SectionHeading.astro';
+---
+
+<BaseLayout
+  title="Contact"
+  description="Get in touch with Menapia to discuss atmospheric profiling, forecast partnerships, or research collaboration."
+>
+  <section class="pt-32 pb-20 sm:pt-40 sm:pb-28">
+    <div class="container-wide section-padding">
+      <SectionHeading
+        tag="Contact"
+        title="Let's talk"
+        subtitle="Whether you are a forecast centre, research programme, or organisation that depends on atmospheric data — we welcome the conversation."
+      />
+    </div>
+  </section>
+
+  <section class="py-20 border-t border-slate-800/50">
+    <div class="container-wide section-padding">
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+        <!-- Form -->
+        <div>
+          <form
+            action="https://formsubmit.co/info@menapia.tech"
+            method="POST"
+            class="space-y-6"
+          >
+            <!-- Honeypot -->
+            <input type="text" name="_honey" class="hidden" tabindex="-1" autocomplete="off" />
+            <!-- Disable captcha page -->
+            <input type="hidden" name="_captcha" value="false" />
+            <input type="hidden" name="_next" value="https://menapia-tech.github.io/menapia-site/contact/" />
+
+            <div>
+              <label for="name" class="block text-sm font-medium text-slate-300 mb-2">
+                Name <span class="text-atmos-400">*</span>
+              </label>
+              <input
+                type="text"
+                id="name"
+                name="name"
+                required
+                autocomplete="name"
+                class="w-full px-4 py-3 bg-slate-900/60 border border-slate-700/50 rounded-xl text-white text-sm placeholder:text-slate-500 focus:border-atmos-500 focus:ring-1 focus:ring-atmos-500 transition-colors"
+                placeholder="Your name"
+              />
+            </div>
+
+            <div>
+              <label for="email" class="block text-sm font-medium text-slate-300 mb-2">
+                Email <span class="text-atmos-400">*</span>
+              </label>
+              <input
+                type="email"
+                id="email"
+                name="email"
+                required
+                autocomplete="email"
+                class="w-full px-4 py-3 bg-slate-900/60 border border-slate-700/50 rounded-xl text-white text-sm placeholder:text-slate-500 focus:border-atmos-500 focus:ring-1 focus:ring-atmos-500 transition-colors"
+                placeholder="you@organisation.com"
+              />
+            </div>
+
+            <div>
+              <label for="organisation" class="block text-sm font-medium text-slate-300 mb-2">
+                Organisation
+              </label>
+              <input
+                type="text"
+                id="organisation"
+                name="organisation"
+                autocomplete="organization"
+                class="w-full px-4 py-3 bg-slate-900/60 border border-slate-700/50 rounded-xl text-white text-sm placeholder:text-slate-500 focus:border-atmos-500 focus:ring-1 focus:ring-atmos-500 transition-colors"
+                placeholder="Your organisation"
+              />
+            </div>
+
+            <div>
+              <label for="subject" class="block text-sm font-medium text-slate-300 mb-2">
+                Subject <span class="text-atmos-400">*</span>
+              </label>
+              <select
+                id="subject"
+                name="subject"
+                required
+                class="w-full px-4 py-3 bg-slate-900/60 border border-slate-700/50 rounded-xl text-white text-sm focus:border-atmos-500 focus:ring-1 focus:ring-atmos-500 transition-colors"
+              >
+                <option value="" class="bg-slate-900">Select a topic</option>
+                <option value="forecast-partnership" class="bg-slate-900">Forecast partnership</option>
+                <option value="research-collaboration" class="bg-slate-900">Research collaboration</option>
+                <option value="data-requirements" class="bg-slate-900">Data requirements</option>
+                <option value="general" class="bg-slate-900">General enquiry</option>
+                <option value="careers" class="bg-slate-900">Careers</option>
+              </select>
+            </div>
+
+            <div>
+              <label for="message" class="block text-sm font-medium text-slate-300 mb-2">
+                Message <span class="text-atmos-400">*</span>
+              </label>
+              <textarea
+                id="message"
+                name="message"
+                required
+                rows="5"
+                class="w-full px-4 py-3 bg-slate-900/60 border border-slate-700/50 rounded-xl text-white text-sm placeholder:text-slate-500 focus:border-atmos-500 focus:ring-1 focus:ring-atmos-500 transition-colors resize-y"
+                placeholder="Tell us about your requirements or interests..."
+              ></textarea>
+            </div>
+
+            <button
+              type="submit"
+              class="w-full sm:w-auto px-8 py-3 bg-atmos-600 hover:bg-atmos-500 text-white font-medium rounded-xl transition-colors text-sm"
+            >
+              Send message
+            </button>
+          </form>
+
+          <p class="mt-4 text-xs text-slate-500">
+            Alternatively, email us directly at
+            <a href="mailto:info@menapia.tech" class="text-atmos-400 hover:text-atmos-300 transition-colors">
+              info@menapia.tech
+            </a>
+          </p>
+        </div>
+
+        <!-- Info -->
+        <div class="space-y-8">
+          <div class="glass rounded-2xl p-6 sm:p-8">
+            <h3 class="text-white font-semibold text-lg mb-4">What to expect</h3>
+            <ul class="space-y-3 text-sm text-slate-400">
+              <li class="flex gap-3">
+                <svg class="w-5 h-5 text-atmos-400 shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                </svg>
+                We aim to respond within two working days.
+              </li>
+              <li class="flex gap-3">
+                <svg class="w-5 h-5 text-atmos-400 shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                </svg>
+                Initial conversations are always without obligation.
+              </li>
+              <li class="flex gap-3">
+                <svg class="w-5 h-5 text-atmos-400 shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                </svg>
+                We are happy to discuss technical requirements in detail.
+              </li>
+            </ul>
+          </div>
+
+          <div class="glass rounded-2xl p-6 sm:p-8">
+            <h3 class="text-white font-semibold text-lg mb-4">Location</h3>
+            <p class="text-slate-400 text-sm">
+              United Kingdom
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

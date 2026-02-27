@@ -1,0 +1,115 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import SectionHeading from '../components/SectionHeading.astro';
+---
+
+<BaseLayout
+  title="About"
+  description="Menapia is an operational atmospheric profiling company building drone-based observing networks for forecasting, climate research, and decision systems."
+>
+  <section class="pt-32 pb-20 sm:pt-40 sm:pb-28">
+    <div class="container-wide section-padding">
+      <SectionHeading
+        tag="About"
+        title="Building the atmospheric observing infrastructure the world needs"
+        subtitle="Menapia is an operational atmospheric profiling company. We design, build, and operate vertically profiling drone networks that deliver calibrated atmospheric observations to forecast centres, research programmes, and decision-makers."
+      />
+    </div>
+  </section>
+
+  <!-- Mission -->
+  <section class="py-20 border-t border-slate-800/50">
+    <div class="container-wide section-padding">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
+        <div>
+          <h2 class="text-2xl font-bold text-white mb-4">Our mission</h2>
+          <p class="text-slate-400 leading-relaxed">
+            The lower atmosphere — the boundary layer where weather begins, where pollutants concentrate,
+            and where renewable energy is generated — remains critically under-observed. Radiosondes
+            are sparse and expensive. Ground-based remote sensing has limitations. Satellite retrievals
+            lack vertical resolution near the surface.
+          </p>
+          <p class="text-slate-400 leading-relaxed mt-4">
+            We are building a new class of observing infrastructure: networks of vertically profiling
+            drones that collect calibrated atmospheric columns routinely, affordably, and at the
+            spatial density that modern forecasting demands.
+          </p>
+        </div>
+        <div>
+          <h2 class="text-2xl font-bold text-white mb-4">Our values</h2>
+          <ul class="space-y-4">
+            <li class="flex gap-3">
+              <div class="shrink-0 w-2 h-2 rounded-full bg-atmos-500 mt-2"></div>
+              <div>
+                <p class="text-white font-medium">Measurement integrity</p>
+                <p class="text-slate-400 text-sm mt-1">We do not compromise on calibration, traceability, or quality control. Our observations must be trustworthy.</p>
+              </div>
+            </li>
+            <li class="flex gap-3">
+              <div class="shrink-0 w-2 h-2 rounded-full bg-atmos-500 mt-2"></div>
+              <div>
+                <p class="text-white font-medium">Operational discipline</p>
+                <p class="text-slate-400 text-sm mt-1">Reliable observations require reliable operations. We design for sustained, routine deployment — not one-off demonstrations.</p>
+              </div>
+            </li>
+            <li class="flex gap-3">
+              <div class="shrink-0 w-2 h-2 rounded-full bg-atmos-500 mt-2"></div>
+              <div>
+                <p class="text-white font-medium">Open collaboration</p>
+                <p class="text-slate-400 text-sm mt-1">We work within the research and forecasting community, not apart from it. Collaboration amplifies impact.</p>
+              </div>
+            </li>
+            <li class="flex gap-3">
+              <div class="shrink-0 w-2 h-2 rounded-full bg-atmos-500 mt-2"></div>
+              <div>
+                <p class="text-white font-medium">Standards alignment</p>
+                <p class="text-slate-400 text-sm mt-1">We deliver data in the formats and standards that the meteorological community expects and depends on.</p>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Operational discipline -->
+  <section class="py-20 border-t border-slate-800/50">
+    <div class="container-wide section-padding">
+      <SectionHeading
+        tag="Operations"
+        title="Operational discipline"
+        subtitle="We approach atmospheric observation as an operational challenge, not just an engineering one."
+      />
+
+      <div class="mt-10 glass rounded-2xl p-6 sm:p-8 max-w-3xl">
+        <p class="text-slate-400 leading-relaxed">
+          Collecting a single vertical profile is straightforward. Collecting thousands of profiles,
+          consistently, across sites, in all weather, with full quality control and timely
+          delivery — that is the challenge we have built our company around.
+        </p>
+        <p class="text-slate-400 leading-relaxed mt-4">
+          Our operational processes cover flight scheduling, sensor calibration, data processing,
+          quality control, format encoding, and delivery — all designed to run routinely and
+          at scale.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Careers -->
+  <section class="py-20 border-t border-slate-800/50">
+    <div class="container-narrow section-padding text-center">
+      <h2 class="text-2xl sm:text-3xl font-bold text-white">Join us</h2>
+      <p class="mt-3 text-slate-400 max-w-lg mx-auto">
+        We are a small team solving a hard problem. If you are interested in atmospheric science,
+        drone operations, data engineering, or building observing networks — we would like to hear from you.
+      </p>
+      <a
+        href="/menapia-site/contact/"
+        class="mt-6 inline-block px-6 py-3 bg-atmos-600 hover:bg-atmos-500 text-white font-medium rounded-xl transition-colors text-sm"
+      >
+        Get in touch
+      </a>
+    </div>
+  </section>
+</BaseLayout>

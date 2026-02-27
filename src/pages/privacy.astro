@@ -1,0 +1,77 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import SectionHeading from '../components/SectionHeading.astro';
+---
+
+<BaseLayout
+  title="Privacy Policy"
+  description="Menapia's privacy policy — how we handle your data."
+>
+  <section class="pt-32 pb-20 sm:pt-40 sm:pb-28">
+    <div class="container-narrow section-padding">
+      <SectionHeading
+        tag="Legal"
+        title="Privacy policy"
+        subtitle="How we handle your information."
+      />
+
+      <div class="mt-12 prose prose-invert prose-slate max-w-none space-y-8 text-slate-400 text-sm leading-relaxed">
+        <div>
+          <h2 class="text-white text-lg font-semibold mb-3">Overview</h2>
+          <p>
+            Menapia is committed to protecting the privacy of individuals who visit our website and
+            interact with our services. This policy describes how we collect, use, and protect your
+            personal information.
+          </p>
+        </div>
+
+        <div>
+          <h2 class="text-white text-lg font-semibold mb-3">Information we collect</h2>
+          <p>
+            When you contact us through our website, we may collect your name, email address,
+            organisation, and the content of your message. We do not use tracking cookies or
+            third-party analytics services on this website.
+          </p>
+        </div>
+
+        <div>
+          <h2 class="text-white text-lg font-semibold mb-3">How we use your information</h2>
+          <p>
+            Information you provide through our contact form is used solely to respond to your
+            enquiry and to discuss potential collaboration. We do not sell, share, or otherwise
+            distribute your personal information to third parties.
+          </p>
+        </div>
+
+        <div>
+          <h2 class="text-white text-lg font-semibold mb-3">Data retention</h2>
+          <p>
+            We retain contact information for the duration of any active discussion or collaboration.
+            You may request deletion of your data at any time by contacting us at
+            <a href="mailto:info@menapia.tech" class="text-atmos-400 hover:text-atmos-300 transition-colors">info@menapia.tech</a>.
+          </p>
+        </div>
+
+        <div>
+          <h2 class="text-white text-lg font-semibold mb-3">Your rights</h2>
+          <p>
+            Under applicable data protection legislation, you have the right to access, correct, or
+            delete your personal data. To exercise these rights, please contact us.
+          </p>
+        </div>
+
+        <div>
+          <h2 class="text-white text-lg font-semibold mb-3">Contact</h2>
+          <p>
+            For privacy-related enquiries, contact us at
+            <a href="mailto:info@menapia.tech" class="text-atmos-400 hover:text-atmos-300 transition-colors">info@menapia.tech</a>.
+          </p>
+        </div>
+
+        <p class="text-slate-500 text-xs">
+          Last updated: February 2026
+        </p>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

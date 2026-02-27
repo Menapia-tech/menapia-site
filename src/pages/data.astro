@@ -1,0 +1,156 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import SectionHeading from '../components/SectionHeading.astro';
+
+const sampleGeoJSON = `{
+  "type": "Feature",
+  "geometry": {
+    "type": "Point",
+    "coordinates": [-3.19, 55.95]
+  },
+  "properties": {
+    "station_id": "MNP-UK-001",
+    "profile_time": "2026-02-27T08:00:00Z",
+    "profile_type": "vertical_ascent",
+    "max_altitude_m": 1200,
+    "variables": [
+      "temperature",
+      "relative_humidity",
+      "pressure",
+      "wind_speed",
+      "wind_direction"
+    ],
+    "qc_level": "level_2",
+    "format_available": [
+      "netCDF",
+      "BUFR",
+      "TEMP"
+    ]
+  }
+}`;
+---
+
+<BaseLayout
+  title="Data"
+  description="Atmospheric profile data delivered in standard meteorological formats with rigorous QA/QC and metadata discipline."
+>
+  <section class="pt-32 pb-20 sm:pt-40 sm:pb-28">
+    <div class="container-wide section-padding">
+      <SectionHeading
+        tag="Data"
+        title="Decision-grade atmospheric observations"
+        subtitle="Calibrated vertical profiles delivered in standard formats, with rigorous quality control and complete metadata lineage from sensor to delivery."
+      />
+    </div>
+  </section>
+
+  <!-- Formats -->
+  <section class="py-20 border-t border-slate-800/50">
+    <div class="container-wide section-padding">
+      <SectionHeading
+        tag="Formats"
+        title="Standard meteorological formats"
+      />
+
+      <div class="mt-10 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div class="glass rounded-2xl p-6">
+          <h3 class="text-white font-mono font-semibold text-lg mb-2">netCDF</h3>
+          <p class="text-slate-400 text-sm leading-relaxed">
+            CF-compliant netCDF files with full metadata attributes. The primary delivery format for research and analysis workflows.
+          </p>
+        </div>
+        <div class="glass rounded-2xl p-6">
+          <h3 class="text-white font-mono font-semibold text-lg mb-2">BUFR</h3>
+          <p class="text-slate-400 text-sm leading-relaxed">
+            WMO Binary Universal Form for the Representation of meteorological data. Standard format for operational NWP ingest.
+          </p>
+        </div>
+        <div class="glass rounded-2xl p-6">
+          <h3 class="text-white font-mono font-semibold text-lg mb-2">TEMP</h3>
+          <p class="text-slate-400 text-sm leading-relaxed">
+            Traditional upper-air sounding format, supporting interoperability with legacy systems and standard processing chains.
+          </p>
+        </div>
+        <div class="glass rounded-2xl p-6">
+          <h3 class="text-white font-mono font-semibold text-lg mb-2">API</h3>
+          <p class="text-slate-400 text-sm leading-relaxed">
+            RESTful API access for programmatic retrieval of profile data, station metadata, and operational status in JSON and GeoJSON.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- QA/QC -->
+  <section class="py-20 border-t border-slate-800/50">
+    <div class="container-wide section-padding">
+      <SectionHeading
+        tag="Quality"
+        title="QA/QC and metadata discipline"
+        subtitle="Every observation passes through multi-stage quality control before delivery."
+      />
+
+      <div class="mt-10 max-w-2xl space-y-4">
+        <div class="flex gap-4 items-start">
+          <div class="shrink-0 w-8 h-8 rounded-full bg-atmos-950/80 border border-atmos-800/50 flex items-center justify-center text-atmos-400 text-xs font-bold">1</div>
+          <div>
+            <h3 class="text-white font-semibold text-sm">Automated sensor checks</h3>
+            <p class="text-slate-400 text-xs mt-1">Real-time validation of sensor response, range, and consistency during each profile.</p>
+          </div>
+        </div>
+        <div class="flex gap-4 items-start">
+          <div class="shrink-0 w-8 h-8 rounded-full bg-atmos-950/80 border border-atmos-800/50 flex items-center justify-center text-atmos-400 text-xs font-bold">2</div>
+          <div>
+            <h3 class="text-white font-semibold text-sm">Profile-level quality control</h3>
+            <p class="text-slate-400 text-xs mt-1">Statistical and physical consistency checks applied to each complete profile.</p>
+          </div>
+        </div>
+        <div class="flex gap-4 items-start">
+          <div class="shrink-0 w-8 h-8 rounded-full bg-atmos-950/80 border border-atmos-800/50 flex items-center justify-center text-atmos-400 text-xs font-bold">3</div>
+          <div>
+            <h3 class="text-white font-semibold text-sm">Metadata enrichment</h3>
+            <p class="text-slate-400 text-xs mt-1">Full provenance — calibration records, sensor serial numbers, flight parameters, QC flags — embedded in every delivery.</p>
+          </div>
+        </div>
+        <div class="flex gap-4 items-start">
+          <div class="shrink-0 w-8 h-8 rounded-full bg-atmos-950/80 border border-atmos-800/50 flex items-center justify-center text-atmos-400 text-xs font-bold">4</div>
+          <div>
+            <h3 class="text-white font-semibold text-sm">Format encoding and delivery</h3>
+            <p class="text-slate-400 text-xs mt-1">Quality-controlled profiles encoded in requested formats and delivered to partner ingest systems.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Sample data -->
+  <section class="py-20 border-t border-slate-800/50">
+    <div class="container-wide section-padding">
+      <SectionHeading
+        tag="Example"
+        title="Sample GeoJSON profile metadata"
+        subtitle="A representative example of the metadata structure accompanying each delivered profile."
+      />
+
+      <div class="mt-8 glass rounded-2xl p-6 overflow-x-auto">
+        <pre class="text-sm font-mono text-atmos-300 leading-relaxed"><code>{sampleGeoJSON}</code></pre>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="py-20 border-t border-slate-800/50">
+    <div class="container-narrow section-padding text-center">
+      <h2 class="text-2xl sm:text-3xl font-bold text-white">Discuss data requirements</h2>
+      <p class="mt-3 text-slate-400 max-w-lg mx-auto">
+        Tell us about your data formats, delivery timelines, and quality requirements. We will work with you to ensure our observations integrate smoothly.
+      </p>
+      <a
+        href="/menapia-site/contact/"
+        class="mt-6 inline-block px-6 py-3 bg-atmos-600 hover:bg-atmos-500 text-white font-medium rounded-xl transition-colors text-sm"
+      >
+        Start a data conversation
+      </a>
+    </div>
+  </section>
+</BaseLayout>

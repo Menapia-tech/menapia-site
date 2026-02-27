@@ -1,0 +1,47 @@
+---
+const currentYear = new Date().getFullYear();
+---
+
+<footer class="border-t border-slate-800 mt-auto" role="contentinfo">
+  <div class="container-wide section-padding py-12">
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+      <!-- Brand -->
+      <div>
+        <p class="text-white font-semibold text-lg mb-2">Menapia</p>
+        <p class="text-slate-400 text-sm leading-relaxed max-w-xs">
+          Operational atmospheric profiling. Vertically profiling drone networks delivering decision-grade data.
+        </p>
+      </div>
+
+      <!-- Navigation -->
+      <div>
+        <p class="text-white font-medium text-sm mb-3">Navigation</p>
+        <ul class="space-y-2 text-sm" role="list">
+          <li><a href="/menapia-site/projects/" class="text-slate-400 hover:text-atmos-400 transition-colors">Projects</a></li>
+          <li><a href="/menapia-site/platform/" class="text-slate-400 hover:text-atmos-400 transition-colors">Platform</a></li>
+          <li><a href="/menapia-site/data/" class="text-slate-400 hover:text-atmos-400 transition-colors">Data</a></li>
+          <li><a href="/menapia-site/operations/" class="text-slate-400 hover:text-atmos-400 transition-colors">Operations</a></li>
+        </ul>
+      </div>
+
+      <!-- Contact -->
+      <div>
+        <p class="text-white font-medium text-sm mb-3">Contact</p>
+        <ul class="space-y-2 text-sm" role="list">
+          <li><a href="/menapia-site/contact/" class="text-slate-400 hover:text-atmos-400 transition-colors">Get in touch</a></li>
+          <li><a href="/menapia-site/about/" class="text-slate-400 hover:text-atmos-400 transition-colors">About us</a></li>
+          <li><a href="/menapia-site/privacy/" class="text-slate-400 hover:text-atmos-400 transition-colors">Privacy policy</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="mt-10 pt-6 border-t border-slate-800 flex flex-col sm:flex-row justify-between items-center gap-4">
+      <p class="text-slate-500 text-xs">
+        &copy; {currentYear} Menapia. All rights reserved.
+      </p>
+      <p class="text-slate-600 text-xs">
+        United Kingdom
+      </p>
+    </div>
+  </div>
+</footer>

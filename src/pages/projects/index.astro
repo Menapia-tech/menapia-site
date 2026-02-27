@@ -1,0 +1,53 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import SectionHeading from '../../components/SectionHeading.astro';
+import ProjectCard from '../../components/ProjectCard.astro';
+import { getCollection } from 'astro:content';
+
+const projects = (await getCollection('projects')).sort((a, b) => a.data.order - b.data.order);
+---
+
+<BaseLayout
+  title="Projects"
+  description="Research collaborations and operational deployments. Menapia works with ARIA, UKRI, and other programmes to advance atmospheric observation."
+>
+  <section class="pt-32 pb-20 sm:pt-40 sm:pb-28">
+    <div class="container-wide section-padding">
+      <SectionHeading
+        tag="Projects"
+        title="Research collaborations"
+        subtitle="We contribute operational atmospheric profiling capability to research programmes that are advancing weather forecasting, climate understanding, and renewable energy integration."
+      />
+
+      <div class="mt-12 grid grid-cols-1 md:grid-cols-2 gap-6">
+        {projects.map((project) => (
+          <ProjectCard
+            title={project.data.title}
+            programme={project.data.programme}
+            role={project.data.role}
+            status={project.data.status}
+            summary={project.data.summary}
+            externalUrl={project.data.externalUrl}
+            tags={project.data.tags}
+            slug={project.id}
+          />
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="py-20 border-t border-slate-800/50">
+    <div class="container-narrow section-padding text-center">
+      <h2 class="text-2xl font-bold text-white">Interested in collaborating?</h2>
+      <p class="mt-3 text-slate-400">
+        We welcome discussions with research programmes that need operational atmospheric profiling capability.
+      </p>
+      <a
+        href="/menapia-site/contact/"
+        class="mt-6 inline-block px-6 py-3 bg-atmos-600 hover:bg-atmos-500 text-white font-medium rounded-xl transition-colors text-sm"
+      >
+        Get in touch
+      </a>
+    </div>
+  </section>
+</BaseLayout>

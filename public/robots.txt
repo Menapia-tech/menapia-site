@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://menapia-tech.github.io/menapia-site/sitemap-index.xml
