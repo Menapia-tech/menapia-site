@@ -14,18 +14,18 @@
   --color-slate-900: #0f172a;
   --color-slate-950: #020617;
 
-  /* Atmospheric accent */
-  --color-atmos-50: #eef7ff;
-  --color-atmos-100: #d9edff;
-  --color-atmos-200: #bce0ff;
-  --color-atmos-300: #8eccff;
-  --color-atmos-400: #59b0ff;
-  --color-atmos-500: #3390ff;
-  --color-atmos-600: #1b6ff5;
-  --color-atmos-700: #1459e1;
-  --color-atmos-800: #1747b6;
-  --color-atmos-900: #193f8f;
-  --color-atmos-950: #142857;
+  /* Atmospheric accent — brand teal #00A7A7 */
+  --color-atmos-50: #effefb;
+  --color-atmos-100: #c7fff4;
+  --color-atmos-200: #90ffea;
+  --color-atmos-300: #51f7dc;
+  --color-atmos-400: #1de4c9;
+  --color-atmos-500: #00c8b0;
+  --color-atmos-600: #00a7a7;
+  --color-atmos-700: #057f7e;
+  --color-atmos-800: #0a6465;
+  --color-atmos-900: #0d5253;
+  --color-atmos-950: #003234;
 
   /* Typography */
   --font-sans: 'Inter', ui-sans-serif, system-ui, -apple-system, sans-serif;

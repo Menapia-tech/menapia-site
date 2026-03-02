@@ -13,7 +13,7 @@ interface Props {
 const { title, description, ogImage, noIndex = false } = Astro.props;
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 const siteTitle = `${title} | Menapia`;
-const defaultOgImage = new URL('/menapia-site/og-default.png', Astro.site).toString();
+const defaultOgImage = new URL('/menapia-site/logo.png', Astro.site).toString();
 ---
 
 <!doctype html>
